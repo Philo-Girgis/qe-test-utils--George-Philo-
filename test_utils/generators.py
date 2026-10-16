@@ -55,7 +55,9 @@ def make_test_case(test_id, name, **options):
     make_test_case('TC-001', 'Login', priority='High', browser='Chrome') adds/overrides keys.
     """
     # TODO: build the defaults dict, then case.update(options); return case
-    pass
+    case = {"id": test_id, "name": name, "priority": 'Medium', "status": 'New', "duration": 0.0}
+    case.update(options)
+    return case
 
 
 def generate_test_cases(count, seed=None):
@@ -65,4 +67,10 @@ def generate_test_cases(count, seed=None):
     duration is a random value from 0.10 to 5.00 seconds (2 decimals).
     """
     # TODO: rng = random.Random(seed); loop number in range(1, count + 1); reuse generate_test_id and make_test_case
-    pass
+    rng = random.Random(seed)
+    cases = []
+    for num in range(1, count+1):
+        id = generate_test_id(num)
+        case = make_test_case(id, "Test case "+str(num), priority = rng.choice(PRIORITIES),status =  rng.choice(STATUSES), duration = round(rng.uniform(0.1, 5.0), 2))
+        cases.append(case)
+    return cases
