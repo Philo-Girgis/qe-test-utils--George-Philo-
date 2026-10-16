@@ -3,19 +3,25 @@
 
 def is_in_range(value, low, high):
     """Return True if low <= value <= high (both ends included)."""
+    if low<= value <= high:
+        return True
+    else:
+        return False
     # TODO: one comparison; Python allows low <= value <= high
-    pass
 
 
 def is_valid_test_id(test_id, prefix="TC", digits=3):
     """Return True for IDs like 'TC-007': the prefix, a dash, then exactly `digits` digits."""
+    if test_id.startswith(prefix + "-") and test_id[len(prefix)+1:].isdigit() and len(test_id[len(prefix)+1:]) == digits:
+        return True
+    else: 
+        return False
     # TODO: check the start with .startswith, slice off the prefix, then .isdigit() and len()
-    pass
 
 
 def is_valid_email(email):
     """Return True for a simple email shape (a deliberately simple teaching version).
-
+    
     Rules: no spaces, exactly one '@', something before the '@',
     and a domain that contains a '.' but does not start or end with one.
     """
@@ -32,6 +38,7 @@ def is_strong_password(password, min_length=8):
 
 def is_valid_status_code(code):
     """Return True for HTTP status codes from 100 to 599. Reuses is_in_range."""
+    return is_in_range(code, 100,599)
     # TODO: ONE line: reuse is_in_range
     pass
 
