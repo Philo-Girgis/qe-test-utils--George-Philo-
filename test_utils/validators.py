@@ -59,9 +59,8 @@ def is_strong_password(password, min_length=8):
 
 def is_valid_status_code(code):
     """Return True for HTTP status codes from 100 to 599. Reuses is_in_range."""
-    return is_in_range(code, 100,599)
     # TODO: ONE line: reuse is_in_range
-    pass
+    return is_in_range(code, 100,599)
 
 
 def all_pass(value, *checks):
@@ -71,4 +70,7 @@ def all_pass(value, *checks):
     Example: all_pass("TC-001", is_valid_test_id, lambda s: s.endswith("1"))
     """
     # TODO: loop over `checks`; return False as soon as one fails; return True after the loop
-    pass
+    for i in checks:
+        if i(value) != True:
+            return False
+    return True
