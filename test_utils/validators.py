@@ -26,14 +26,35 @@ def is_valid_email(email):
     and a domain that contains a '.' but does not start or end with one.
     """
     # TODO: early `return False` checks first (space, count of '@'), then split('@')
-    pass
+    if " " in email or email.count("@") != 1:
+        return False
+    bef, dom = email.split("@")
+    if bool(bef) and "." in dom and not dom.startswith(".") and not dom.endswith("."):
+        return True
+    else:
+        return False
 
 
 def is_strong_password(password, min_length=8):
     """Return True if the password has at least `min_length` characters and
     contains at least one uppercase letter, one lowercase letter and one digit."""
     # TODO: loop over the characters with a flag per kind; .isupper() .islower() .isdigit()
-    pass
+    if len(password) < min_length:
+        return False
+    up = False
+    low = False
+    dig = False
+    for c in password:
+        if c.isupper():
+            up = True
+        if c.islower():
+            low = True
+        if c.isdigit():
+            dig = True
+    if up and low and dig:
+        return True
+    else:
+        return False
 
 
 def is_valid_status_code(code):
