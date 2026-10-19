@@ -18,6 +18,16 @@ def build_demo_report(count=6, seed=7):
     #   sorted(counts) for the alphabetical priority names, and sort_cases(..., reverse=True).
     #   Build a list `lines`, then return "\n".join(lines).
     cases = generate_test_cases(count, seed=seed)
+    slow = slowest(cases)
+    count = count_by(sort_cases(cases, "priority"), "priority")
+    lines = ['TEST DATA REPORT',
+        'Total: '+str(len(cases)),
+        'Slowest: '+slow.get("id")+' ('+str(slow.get("duration"))+"s)",
+        "By priority: "+str(count)]
+    sort = sort_cases(cases, "duration", reverse=True)
+    for c in sort:
+        lines.append(c.get("id")+" | "+c.get("priority")+" | "+c.get("status")+" | "+str(c.get("duration"))+" s")
+    return "\n".join(lines)
 
 
 if __name__ == "__main__":
