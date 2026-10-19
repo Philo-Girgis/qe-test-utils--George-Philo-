@@ -17,7 +17,7 @@ def build_demo_report(count=6, seed=7):
     # TODO (Milestone 5): cases = generate_test_cases(count, seed=seed); use slowest(), count_by(),
     #   sorted(counts) for the alphabetical priority names, and sort_cases(..., reverse=True).
     #   Build a list `lines`, then return "\n".join(lines).
-    pass
+    cases = generate_test_cases(count, seed=seed)
 
 
 if __name__ == "__main__":
